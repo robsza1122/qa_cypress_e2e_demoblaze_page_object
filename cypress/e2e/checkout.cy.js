@@ -47,6 +47,8 @@ describe('checkout', () => {
       .should('be.visible');
     cy.contains('.lead', name)
       .should('be.visible');
+    cy.contains('.lead', country)
+      .should('be.visible');
     cy.contains('.lead', creditCard)
       .should('be.visible');
     cy.contains('button', 'OK')
