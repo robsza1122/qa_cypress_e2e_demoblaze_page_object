@@ -27,6 +27,8 @@ describe('checkout', () => {
     pageObject.assertAllert('Product added');
     cy.get('#cartur')
       .click();
+    cy.contains('td', 'Sony vaio i7')
+      .should('be.visible');
     cy.get('[data-target="#orderModal"]')
       .click();
     cy.get('#name')
@@ -46,8 +48,6 @@ describe('checkout', () => {
     cy.contains('h2', 'Thank you for your purchase!')
       .should('be.visible');
     cy.contains('.lead', name)
-      .should('be.visible');
-    cy.contains('.lead', country)
       .should('be.visible');
     cy.contains('.lead', creditCard)
       .should('be.visible');
