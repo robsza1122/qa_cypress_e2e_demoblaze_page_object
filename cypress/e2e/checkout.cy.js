@@ -18,40 +18,24 @@ describe('checkout', () => {
   });
 
   it('should show entered data in modal window after purchasing', () => {
-    cy.contains(`[onclick="byCat('notebook')"]`, 'Laptops')
-      .click();
-    cy.contains('.card-title', 'Sony vaio i7')
-      .click();
-    cy.contains('a', 'Add to cart')
-      .click();
+    pageObject.selectCategory('Laptops');
+    pageObject.chooseSelector('.card-title', 'Sony vaio i7');
+    pageObject.chooseSelector('a', 'Add to cart');
     pageObject.assertAllert('Product added');
-    cy.get('#cartur')
-      .click();
-    cy.contains('td', 'Sony vaio i7')
-      .should('be.visible');
-    cy.get('[data-target="#orderModal"]')
-      .click();
-    cy.get('#name')
-      .type(name);
-    cy.get('#country')
-      .type(country);
-    cy.get('#city')
-      .type(city);
-    cy.get('#card')
-      .type(creditCard);
-    cy.get('#month')
-      .type(month);
-    cy.get('#year')
-      .type(year);
-    cy.contains('button', 'Purchase')
-      .click();
-    cy.contains('h2', 'Thank you for your purchase!')
-      .should('be.visible');
-    cy.contains('.lead', name)
-      .should('be.visible');
-    cy.contains('.lead', creditCard)
-      .should('be.visible');
-    cy.contains('button', 'OK')
-      .click();
+    pageObject.chooseSelector('#cartur', 'Cart');
+    pageObject.chooseSelector('a', 'Cart');
+    pageObject.checkVisibility('td', 'Sony vaio i7');
+    pageObject.chooseSelector('[data-target="#orderModal"]', 'Place Order');
+    pageObject.typeTextInInput('#name', name);
+    pageObject.typeTextInInput('#country', country);
+    pageObject.typeTextInInput('#city', city);
+    pageObject.typeTextInInput('#card', creditCard);
+    pageObject.typeTextInInput('#month', month);
+    pageObject.typeTextInInput('#year', year);
+    pageObject.chooseSelector('button', 'Purchase');
+    pageObject.checkVisibility('h2', 'Thank you for your purchase!');
+    pageObject.checkVisibility('.lead', name);
+    pageObject.checkVisibility('.lead', creditCard);
+    pageObject.chooseSelector('button', 'OK');
   });
 });
